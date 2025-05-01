@@ -1,7 +1,11 @@
-import React from "react";
+import React, { use } from "react";
 import { NavLink } from "react-router";
 import user from "../assets/user.png";
+import { AuthContext } from "./Context/AuthContext";
 const Navbar = () => {
+
+  const {user}=use(AuthContext)
+  console.log(user)
   return (
     <div className="flex justify-between items-center">
       <div className=""></div>
@@ -9,6 +13,8 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/career">Career</NavLink>
+        <NavLink to="/signup">signup</NavLink>
+
       </div>
       <div className="login-btn flex gap-5">
         <img src={user} alt="" />
