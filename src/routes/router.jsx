@@ -3,6 +3,10 @@ import HomeLayout from "../layouts/HomeLayout";
 import CategoryNews from "../pages/CategoryNews";
 import Home from "../pages/Home";
 import Signup from "../pages/Signup/Signup";
+import Login from "../pages/Login/Login";
+import NewsDetails from "../pages/NewsDetails/NewsDetails";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import Career from "../components/career";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +21,7 @@ const router = createBrowserRouter([
         path: "/category/:id",
         element: <CategoryNews></CategoryNews>,
         loader: () => fetch("/news.json"),
+        hydrateFallbackElement:<span className="loading loading-bars loading-xl"></span>
       },
     ],
   },
@@ -25,13 +30,23 @@ const router = createBrowserRouter([
     element: <Signup></Signup>,
   },
   {
-    path: "/news",
-    element: <h2>News Layout</h2>,
+    path: "/login",
+    element: <Login></Login>,
+  },{
+    path:'/details/:id',
+    element: <PrivateRoute> <NewsDetails></NewsDetails> </PrivateRoute> ,
+    loader: () => fetch("/news.json"),
+    hydrateFallbackElement:<span className="loading loading-bars loading-xl"></span>
   },
   {
     path: "/*",
     element: <h2>Error404</h2>,
-  },
+  },{
+    path:'/career',
+    element:<PrivateRoute>  <Career></Career> </PrivateRoute> ,
+    
+   
+  }
 ]);
 
 export default router;
